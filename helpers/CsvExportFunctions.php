@@ -76,6 +76,9 @@ function getCsvRow($item, $elements) {
     $row[] = $item->public ? '1' : '0';
     // Featured?
     $row[] = $item->featured ? '1' : '0';
+    // ID?
+    // $itemID = metadata('item', 'id');
+    $row[] = metadata($item, 'id');
     // Done
     return $row;
 }
@@ -101,7 +104,7 @@ function printCsvExport($items) {
         $baseHeaderEntries[] = ($element->element_set_id === null) ? $element->name : "{$element->getElementSet()->name}:{$element->name}";
     }
     // Header: Property tail
-    $headerEntries = array_merge($baseHeaderEntries, array('tags', 'file', 'itemType', 'collection', 'public', 'featured'));
+    $headerEntries = array_merge($baseHeaderEntries, array('tags', 'file', 'itemType', 'collection', 'public', 'featured', 'Omeka ID'));
     // Header: Write it in
     _fputcsv($f, $headerEntries);
 
