@@ -30,25 +30,27 @@ function getOrderedElements() {
  */
 function getCsvRow($item, $elements) {
     $row = array();
+    $manyTexts = array();
     // Element texts
     $elementTexts = get_db()->getTable('ElementText')->findByRecord($item);
     foreach ($elements as $element) {
-        $manyTexts = array();
+        
         //$hasEmptyElementText = true;
         foreach ($elementTexts as $elementText) {
+
             if ($elementText->element_id === $element->id) {
                 $manyTexts[] = $elementText->text;
                 //$hasEmptyElementText = false;
                 //break;
             }
         }
-        if ($manyTexts) {
+        //if ($manyTexts) {
             $row[] = join($manyTexts, ';');
-        }
+        //}
         //if ($hasEmptyElementText) {
-        else {
-            $row[] = '';
-        }
+        //else {
+         //   $row[] = '';
+        //}
         //}
     }
     // Tail with tags, file, itemType, collection, public, featured
