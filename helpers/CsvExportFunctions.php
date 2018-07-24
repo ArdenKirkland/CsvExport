@@ -52,7 +52,7 @@ function getCsvRow($item, $elements) {
     foreach ($tags as $tag) {
         $tagNames[] = $tag->name;
     }
-    $row[] = join($tagNames, ',');
+    $row[] = join($tagNames, ';');
     // Files
     $files = $item->getFiles();
     $fileUrls = array();
@@ -67,7 +67,7 @@ function getCsvRow($item, $elements) {
             $fileUrls[] = $file->getWebPath();
         }
     }
-    $row[] = join($fileUrls, ',');
+    $row[] = join($fileUrls, ';');
     // Item type
     $row[] = ($item->item_type_id === null) ? '' : ($item->getItemType()->name);
     // Collection
@@ -77,7 +77,6 @@ function getCsvRow($item, $elements) {
     // Featured?
     $row[] = $item->featured ? '1' : '0';
     // ID?
-    // $itemID = metadata('item', 'id');
     $row[] = metadata($item, 'id');
     // Done
     return $row;
