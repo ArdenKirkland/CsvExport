@@ -33,17 +33,17 @@ function getCsvRow($item, $elements) {
     // Element texts
     $elementTexts = get_db()->getTable('ElementText')->findByRecord($item);
     foreach ($elements as $element) {
-        $hasEmptyElementText = true;
+        //$hasEmptyElementText = true;
         foreach ($elementTexts as $elementText) {
             if ($elementText->element_id === $element->id) {
                 $row[] = $elementText->text;
-                $hasEmptyElementText = false;
-                break;
+                //$hasEmptyElementText = false;
+                //break;
             }
         }
-        if ($hasEmptyElementText) {
+        //if ($hasEmptyElementText) {
             $row[] = '';
-        }
+        //}
     }
     // Tail with tags, file, itemType, collection, public, featured
     // Tags
