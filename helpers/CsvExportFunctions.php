@@ -39,7 +39,7 @@ function getCsvRow($item, $elements) {
                 $manyTexts[] = $elementText->text;
             }
         }
-        $row[] = join($manyTexts, ';');
+        $row[] = join($manyTexts, '; ');
         unset ($manyTexts);
     }
     // Tail with tags, file, itemType, collection, public, featured
@@ -49,7 +49,7 @@ function getCsvRow($item, $elements) {
     foreach ($tags as $tag) {
         $tagNames[] = $tag->name;
     }
-    $row[] = join($tagNames, ';');
+    $row[] = join($tagNames, '; ');
     // Files
     $files = $item->getFiles();
     $fileUrls = array();
@@ -64,7 +64,7 @@ function getCsvRow($item, $elements) {
             $fileUrls[] = $file->getWebPath();
         }
     }
-    $row[] = join($fileUrls, ';');
+    $row[] = join($fileUrls, '; ');
     // Item type
     $row[] = ($item->item_type_id === null) ? '' : ($item->getItemType()->name);
     // Collection
