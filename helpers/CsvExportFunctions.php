@@ -30,16 +30,17 @@ function getOrderedElements() {
  */
 function getCsvRow($item, $elements) {
     $row = array();
-    $manyTexts = array();
+    
     // Element texts
     $elementTexts = get_db()->getTable('ElementText')->findByRecord($item);
     foreach ($elements as $element) {
-        foreach ($elementTexts as $elementText) {
+        $manyTexts = array();
+		foreach ($elementTexts as $elementText) {
             if ($elementText->element_id === $element->id) {
                 $manyTexts[] = $elementText->text;
             }
         }
-        $row[] = join($manyTexts, '; ');
+        $row[] = join(';', $manyTexts);
         unset ($manyTexts);
     }
     // Tail with tags, file, itemType, collection, public, featured
@@ -49,7 +50,7 @@ function getCsvRow($item, $elements) {
     foreach ($tags as $tag) {
         $tagNames[] = $tag->name;
     }
-    $row[] = join($tagNames, '; ');
+    $row[] = join(';', $tagNames);
     // Files
     $files = $item->getFiles();
     $fileUrls = array();
@@ -64,7 +65,7 @@ function getCsvRow($item, $elements) {
             $fileUrls[] = $file->getWebPath();
         }
     }
-    $row[] = join($fileUrls, '; ');
+    $row[] = join(';', $fileUrls);
     // Item type
     $row[] = ($item->item_type_id === null) ? '' : ($item->getItemType()->name);
     // Collection
